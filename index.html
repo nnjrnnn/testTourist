@@ -1,0 +1,407 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Link library leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin="" />
+
+ <!-- W3 CSS template -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin="">
+</script>
+
+ <style>
+#mapid {
+height: 800px;
+}
+</style>
+
+ <title>Tourist map</title>
+</head>
+<body>
+<!-- แบ่งหน้าจอ -->
+<div class="w3-row">
+<div id="mapid" class="w3-half"></div>
+<div id="content" class="w3-half">
+<table class="w3-table w3-striped">
+<tr>
+<th>ชื่อแหล่งท่องเที่ยว</th>
+<th>ประเภท</th>
+<th>ระดับ</th>
+</tr>
+<tr>
+<td>น้ำตก A</td>
+<td>ธรรมชาติ</td>
+<td>A</td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- เรียกแผนที่ขึ้นมาแสดง -->
+<script>
+  //เรียกแผนที่
+var map = L.map("mapid").setView([17.69645,100.947166666666661],8);
+//base map1
+var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+//base map
+var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}").addTo(map);
+//group layer (1+2)
+var baseMaps = {
+  //ชื่อชั้นข้อมูล:ตัวแปร
+    OSM:osm,
+    Google:gsat,
+  };
+//add data
+var tourpoint = {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+},
+features: [
+{
+type: "Feature",
+properties: {
+Name: "อช.ภูสอยดาว",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1358.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.947166666666661, 17.69645]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "อช.น้ำตกชาติตระการ",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1357.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.677166666666665, 17.301816666666667]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกชาติตระการ",
+Type: "ธรรมชาติ",
+FID_1: 1362.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.6831, 17.2981]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกนาจาน",
+Type: "ธรรมชาติ",
+FID_1: 1364.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.691283333333331, 17.3185]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "อช.แก่งเจ็ดแคว",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1355.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.44016666666667, 17.1411]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกน้ำโจน",
+Type: "ธรรมชาติ",
+FID_1: 1365.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.416783333333328, 17.172966666666667]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกแก่งไทร",
+Type: "ธรรมชาติ",
+FID_1: 733.0,
+CHANGWAT: "มุกดาหาร",
+PROVINCE_1: "Mukdahan",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "D",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.43675, 17.143116666666668]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "อช.ภูหินร่องกล้า",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1359.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "A",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.993266666666671, 17.00305]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกผาลาด",
+Type: "ธรรมชาติ",
+FID_1: 603.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "Loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "C",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.938583333333327, 17.032866666666667]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "ลานหินแตก",
+Type: "ธรรมชาติ",
+FID_1: 611.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "Loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "A",
+},
+geometry: { type: "MultiPoint", coordinates: [[100.99, 17.00615]] },
+},
+{
+type: "Feature",
+properties: {
+Name: "ลานหินปุ่ม",
+Type: "ธรรมชาติ",
+FID_1: 1370.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "B",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.99705, 16.9881]],
+},
+},
+],
+};
+
+//add marker and popup
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+ layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+//link table with popup and marker
+var cont = "";
+cont += "<table class='w3-table w3-striped'>";
+cont += "<tr>";
+cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+cont += "<th>ประเภท</th>";
+cont += "<th>ระดับ</th>";
+cont += "</tr>";
+for (let i in tourpoint.features) {
+cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+cont += "</tr>";
+}
+cont += "</table>";
+console.log(cont);
+document.getElementById("content").innerHTML = cont;
+
+//create polygon
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#a68bc1",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.579833984375,
+              16.807170351766935
+            ],
+            [
+              100.67596435546875,
+              16.53089842368168
+            ],
+            [
+              100.799560546875,
+              16.38866117075937
+            ],
+            [
+              101.01654052734375,
+              16.31223155482864
+            ],
+            [
+              101.304931640625,
+              16.29905101458183
+            ],
+            [
+              101.4532470703125,
+              16.370215382307745
+            ],
+            [
+              101.54937744140625,
+              16.49403212250543
+            ],
+            [
+              101.70867919921875,
+              16.559859865723602
+            ],
+            [
+              101.7388916015625,
+              16.662506225634573
+            ],
+            [
+              101.7059326171875,
+              16.77298693096487
+            ],
+            [
+              101.5631103515625,
+              16.949096970944545
+            ],
+            [
+              101.46148681640625,
+              17.001635258159684
+            ],
+            [
+              101.31866455078125,
+              17.05941036379214
+            ],
+            [
+              101.1236572265625,
+              17.090916528369405
+            ],
+            [
+              101.00555419921874,
+              17.104042525557904
+            ],
+            [
+              100.8599853515625,
+              17.07253857905759
+            ],
+            [
+              100.70892333984374,
+              17.012141149739257
+            ],
+            [
+              100.579833984375,
+              16.807170351766935
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return { color: feature.properties.color };
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+
+ layer.on("mouseover", function () {
+layer.openPopup();
+});
+
+ layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+//group point+ploygon layer
+var overlays = {
+    สถานที่ท่องเที่ยว:tourLayer,
+    ขอบเขตอุทยาน:polygonLayer
+
+};
+  //Create layer control
+  L.control.layers(baseMaps,overlays).addTo(map);
+</script>
+
+</body>
