@@ -1,0 +1,579 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin="" />
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin="">
+  </script>
+  <style>
+ #mapid {
+ height: 600px;
+ }
+ </style>
+
+  <title>Korat of Tourist map</title>
+</head>
+<body>
+  <body bgcolor="#FFFFF0"></body>
+  <center><h1>🌄𝙏𝙤𝙪𝙧𝙞𝙨𝙩 𝙤𝙛 𝙉𝙖𝙠𝙝𝙤𝙣 𝙍𝙖𝙩𝙘𝙝𝙖𝙨𝙞𝙢𝙖🚙</h1></center>
+  <hr>
+  <div class="w3-row">
+  <div id="mapid" class="w3-half"></div>
+  <div id="content" class="w3-half">
+  <table class="w3-table w3-striped">
+  <tr>
+  <th>ชื่อแหล่งท่องเที่ยว</th>
+  <th>ประเภท</th>
+  <th>ระดับ</th>
+  </tr>
+  <tr>
+  <td>น้ำตก A</td>
+  <td>ธรรมชาติ</td>
+  <td>A</td>
+  </tr>
+  </table>
+  </div>
+  </div>
+
+  <script>
+    //เรียกแผนที่
+  var map = L.map("mapid").setView([14.999553705970111, 102.12338135191544],8);
+  //base map1
+  var enw = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}").addTo(map);
+  //base map
+  var ewi = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}").addTo(map);
+  //group layer (1+2)
+  var baseMaps = {
+    //ชื่อชั้นข้อมูล:ตัวแปร
+      Esri_NatGeoWorldMap:enw,
+      Esri_WorldImagery:ewi
+    };
+var tourpoint =  {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+},
+features: [
+{
+type: "Feature",
+properties: {
+Name: "ผาเก็บตะวัน",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1358.0,
+CHANGWAT: "นครราชสีมา",
+PROVINCE_1: "Nakhon Ratchasima",
+REGION: "ภาคอีสาน",
+level: "🌟🌟🌟🌟",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.92892970555663, 14.333361340431644]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "อุทยานแห่งชาติเขาใหญ่",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1357.0,
+CHANGWAT: "นครราชสีมา",
+PROVINCE_1: "NakhonRatchasima ",
+REGION: "ภาคอีสาน",
+level: "🌟🌟🌟🌟",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.36524970032279, 14.432254511409033]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "สวนสัตว์นครราชสีมา",
+  Type: "กิจกรรมพิเศษ",
+  FID_1: 1362.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[102.07453571068504, 14.850829481317234]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "Scenical World ",
+  Type: "กิจกรรมพิเศษ",
+  FID_1: 1364.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[101.37830983027261, 14.538405249129314]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "อุทยานประวัติศาสตร์พิมาย",
+  Type: "อุทยานและวนอุทยาน",
+  FID_1: 1355.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[102.49406552537455, 15.220887141291781]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "วัดหลวงพ่อโต",
+  Type: "วัฒนธรรม",
+  FID_1: 1365.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[101.73237957928283, 14.87300816530885]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "อนุเสาวรีย์ท้าวสุรนารี",
+  Type: "วัฒนธรรม",
+  FID_1: 733.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[ 102.09805731061819, 14.974897850200113]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "เขายายเที่ยง",
+  Type: "ธรรมชาติ,กิจกรรมพิเศษ",
+  FID_1: 1359.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[101.56726366101421, 14.849497391222794]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "Flora Park วังน้ำเขียว",
+  Type: "กิจกรรมพิเศษ",
+  FID_1: 603.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[101.79522179733071, 14.393742159909888, ]],
+},
+},
+{
+  type: "Feature",
+  properties: {
+  Name: "วัดบ้านไร่",
+  Type: "วัฒนธรรม",
+  FID_1: 611.0,
+  CHANGWAT: "นครราชสีมา",
+  PROVINCE_1: "NakhonRatchasima ",
+  REGION: "ภาคอีสาน",
+  level: "🌟🌟🌟🌟",
+  },
+  geometry: {
+  type: "MultiPoint",
+  coordinates: [[101.74048116305374, 15.346909500927316, ]],
+},
+},
+],
+};
+
+//add marker and popup
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+ layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+//link table with popup and marker
+var cont = "";
+cont += "<table class='w3-table w3-striped'>";
+cont += "<tr>";
+cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+cont += "<th>ประเภท</th>";
+cont += "<th>ระดับ</th>";
+cont += "</tr>";
+for (let i in tourpoint.features) {
+cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+cont += "</tr>";
+}
+cont += "</table>";
+console.log(cont);
+document.getElementById("content").innerHTML = cont;
+
+//create polygon
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#e8d978",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#3923e1",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.38458251953125,
+              15.326571801420842
+            ],
+            [
+              101.39556884765624,
+              15.072123545811683
+            ],
+            [
+              101.41754150390625,
+              15.00581078905935
+            ],
+            [
+              101.436767578125,
+              14.875778165434696
+            ],
+            [
+              101.414794921875,
+              14.830646447732653
+            ],
+            [
+              101.348876953125,
+              14.774882506516272
+            ],
+            [
+              101.2884521484375,
+              14.732386081418454
+            ],
+            [
+              101.2335205078125,
+              14.743010965702727
+            ],
+            [
+              101.19232177734374,
+              14.745667105779793
+            ],
+            [
+              101.20880126953125,
+              14.676596946649664
+            ],
+            [
+              101.2060546875,
+              14.575609038170498
+            ],
+            [
+              101.19232177734374,
+              14.557000943089454
+            ],
+            [
+              101.21429443359375,
+              14.519780046326085
+            ],
+            [
+              101.2335205078125,
+              14.487871434931572
+            ],
+            [
+              101.23077392578124,
+              14.44797921378886
+            ],
+            [
+              101.2115478515625,
+              14.368173317117904
+            ],
+            [
+              101.25,
+              14.320276096900685
+            ],
+            [
+              101.26922607421875,
+              14.267044974240177
+            ],
+            [
+              101.37908935546874,
+              14.245749000772165
+            ],
+            [
+              101.62078857421874,
+              14.240424693263611
+            ],
+            [
+              101.68121337890625,
+              14.267044974240177
+            ],
+            [
+              101.67022705078125,
+              14.320276096900685
+            ],
+            [
+              101.74713134765625,
+              14.32825967774278
+            ],
+            [
+              101.88995361328125,
+              14.288338935138425
+            ],
+            [
+              101.98333740234375,
+              14.221788628397572
+            ],
+            [
+              102.0355224609375,
+              14.181849032477334
+            ],
+            [
+              102.1343994140625,
+              14.133912230516334
+            ],
+            [
+              102.249755859375,
+              14.115267411122709
+            ],
+            [
+              102.38433837890625,
+              14.133912230516334
+            ],
+            [
+              102.56011962890625,
+              14.227113375214987
+            ],
+            [
+              102.68096923828124,
+              14.314953551894586
+            ],
+            [
+              102.66448974609375,
+              14.336242974455658
+            ],
+            [
+              102.59307861328125,
+              14.352208714914282
+            ],
+            [
+              102.58209228515625,
+              14.392118083661728
+            ],
+            [
+              102.59307861328125,
+              14.453298590545614
+            ],
+            [
+              102.601318359375,
+              14.503826315249
+            ],
+            [
+              102.5518798828125,
+              14.511803324514721
+            ],
+            [
+              102.48870849609375,
+              14.557000943089454
+            ],
+            [
+              102.45025634765625,
+              14.753635331540442
+            ],
+            [
+              102.44476318359375,
+              14.798783094530657
+            ],
+            [
+              102.5518798828125,
+              14.82268104887796
+            ],
+            [
+              102.5518798828125,
+              14.907630165799675
+            ],
+            [
+              102.6617431640625,
+              14.923554399044052
+            ],
+            [
+              102.74688720703125,
+              15.011116568017886
+            ],
+            [
+              102.777099609375,
+              15.072123545811683
+            ],
+            [
+              102.85400390625,
+              15.156973713377667
+            ],
+            [
+              102.919921875,
+              15.188783763403267
+            ],
+            [
+              102.9638671875,
+              15.217938764883565
+            ],
+            [
+              102.95013427734375,
+              15.30273034566194
+            ],
+            [
+              102.97760009765624,
+              15.35570766610093
+            ],
+            [
+              102.9254150390625,
+              15.498679138197133
+            ],
+            [
+              102.799072265625,
+              15.59922947885929
+            ],
+            [
+              102.70294189453125,
+              15.715594652435831
+            ],
+            [
+              102.57659912109375,
+              15.723526226324188
+            ],
+            [
+              102.37335205078125,
+              15.728813770533966
+            ],
+            [
+              102.32940673828125,
+              15.794896464857334
+            ],
+            [
+              102.26348876953125,
+              15.771109173575294
+            ],
+            [
+              102.1563720703125,
+              15.731457491108594
+            ],
+            [
+              102.10968017578125,
+              15.654775665159686
+            ],
+            [
+              102.0135498046875,
+              15.466916214586464
+            ],
+            [
+              101.942138671875,
+              15.448385591512595
+            ],
+            [
+              101.88720703125,
+              15.400727816322217
+            ],
+            [
+              101.67022705078125,
+              15.39543183321259
+            ],
+            [
+              101.44226074218749,
+              15.353059119130279
+            ],
+            [
+              101.38458251953125,
+              15.326571801420842
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return { fillcolor: '#B03060',weight:2,
+       opacity:1,
+       color: '#FFA500', //outline color
+       fillopacity: 0.4};
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+layer.on("mouseover", function () {
+layer.openPopup();
+});
+
+ layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+var overlays = {
+    สถานที่ท่องเที่ยว:tourLayer,
+    ขอบเขต:polygonLayer
+};
+  L.control.layers(baseMaps,overlays).addTo(map);
+</script>
+
+</body>
+</html>
